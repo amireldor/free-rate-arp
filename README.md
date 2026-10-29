@@ -1,5 +1,9 @@
 # Free Rate Arp
 
+<video controls src="demo/free-rate-arp-demo.mp4"></video>
+
+[Watch the demo](demo/free-rate-arp-demo.mp4)
+
 A VST3 MIDI effect that retriggers held notes at a free-running rate. Select **Chord** to repeat all held notes together, or **Played order** to cycle through notes in the order pressed. Rate is 0.1–100 Hz. Gate unit selects either **Gate** as a percentage of the interval or **Gate time** in milliseconds (1–10,000 ms). A note ends at the next pulse or when its input note is released if that happens before the selected gate time. The first note plays immediately; the plugin does not follow the host tempo.
 
 Insert the effect in a host that supports routing MIDI output from VST3 effects to an instrument. MIDI controllers and other non-note messages pass through. Sustain is handled by the receiving instrument; note selection follows the incoming note-on and note-off messages.
