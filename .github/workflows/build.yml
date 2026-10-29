@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Archive VST3
+        shell: bash
+        run: tar -czf FreeRateArp-vst3.tar.gz -C build/FreeRateArp_artefacts/Release/VST3 "Free Rate Arp.vst3"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FreeRateArp-${{ matrix.os }}
+          path: FreeRateArp-vst3.tar.gz
+          if-no-files-found: error
